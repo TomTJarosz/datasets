@@ -11,15 +11,15 @@ def replaceKey(orig, new):
     row[new] = row[orig]
     del row[orig]
 
-for f in listdir("raw/"):
+for f in listdir("../raw/"):
   print(f)
-  with open("raw/" + f, "r") as csvfile:
+  with open("../raw/" + f, "r", errors='ignore') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
       # The unified field for course subject (eg: "CS") will be called "Subject"
       replaceKey("Course Subject", "Subject")
       replaceKey("ï»¿Subject", "Subject")
-
+      replaceKey("\ufeffSubject", "Subject")
       # The unified field for course number (eg: 225) will be called "Number"
       replaceKey("Course", "Number")
       replaceKey("Course ", "Number")
@@ -38,7 +38,7 @@ for f in listdir("raw/"):
       for key in list(row):
         if key not in fieldnames:
           del row[key]
-
+      
       # changing LIS course name to IS to match 2017 name change
       if row["Subject"] == "LIS":
         row["Subject"] = "IS"
