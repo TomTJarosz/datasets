@@ -343,11 +343,11 @@ course_requirements.append(make_rule_must_do_n_of_subset(1, set(["cs498dv"])))
 course_requirements.append(make_rule_must_do_n_of_subset(3, set(["cs513","cs598fdc","cs598psl","cs598abm","cs598ccc","cs598dmc"])))
 course_requirements.append(make_rule_must_do_n_of_subset(1, set(["cs425","cs498cca","cs498cn"])))
 p = Program(uiuc_mcs_courses, course_requirements)
-for i in p.get_best_path(path_rules, [uiuc_mcs_courses[1]]):
+for i in p.get_best_path(path_rules, []):
 	x=[]
 	for c in  i.courses:
 		x.append((c.id, c.YearTerm))
-	print(x)
-	print(sum([q.Average_Gpa for q in i.courses])/float(len(i.courses)))
+	print("Courses:" +str(x))
+	print("Average GPA:" + str(sum([q.Average_Gpa for q in i.courses])/float(len(i.courses))))
 	print('')	
 #print(p.get_best_path(path_rules, [uiuc_mcs_courses[1]]))
